@@ -81,12 +81,41 @@ function aidrafter_api_key_field_callback() {
   <?php
 }
 
-
-// Validate the OpenAI API key before saving it
-add_filter( 'pre_update_option_aidrafter_api_key', 'validate_aidrafter_api_key', 10, 2 );
+/**
+ * Validate the OpenAI API key before saving it
+ *
+ * @param string $new_value The new value of the option
+ * @param string $old_value The old value of the option
+ * @return string The validated value
+ */
 function validate_aidrafter_api_key( $new_value, $old_value ) {
-  // Add your validation logic here
-  if ( ! preg_match( '/^[a-f0-9]{32}$/i', $new_value ) ) {
+  $api_key = $new_value;
+  $url = 'https://api.openai.com/v1/engines';
+  $args = array(
+    'headers' => array(
+      'Content-Type' => 'application/json',
+      'Authorization' => 'Bearer ' . $api_key,
+    ),
+  );
+
+  // Send a request to the OpenAI API to check the status of the key
+  $response = wp_remote_get( $url, $args );
+
+  // If the response is an error, return the old value
+  if ( is_wp_error( $response ) ) {
+    add_settings_error(
+      'aidrafter_api_key',
+      'invalid-api-key',
+      __( 'Error validating the OpenAI API Key.', 'aidrafter' )
+    );
+    return $old_value;
+  }
+
+  // If the response is successful, return the new value
+  $response_body = json_decode( $response['body'], true );
+  if ( isset( $response_body['data'] ) ) {
+    return $new_value;
+  } else {
     add_settings_error(
       'aidrafter_api_key',
       'invalid-api-key',
@@ -94,5 +123,7 @@ function validate_aidrafter_api_key( $new_value, $old_value ) {
     );
     return $old_value;
   }
-  return $new_value;
 }
+
+add_filter( 'pre_update_option_aidrafter_api_key', 'validate_aidrafter_api_key', 10, 2 );
+
