@@ -15,6 +15,9 @@ if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 
+// require cpts.php
+require( 'cpts.php' );
+
 // Add a new menu item under the "Settings" menu
 add_action( 'admin_menu', 'add_aidrafter_settings_page' );
 function add_aidrafter_settings_page() {
