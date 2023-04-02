@@ -17,6 +17,8 @@ if ( ! defined( 'WPINC' ) ) {
 
 // require cpts.php
 require( 'cpts.php' );
+// require metaboxes.php
+require('metaboxes.php' );
 
 // Add a new menu item under the "Settings" menu
 add_action( 'admin_menu', 'add_aidrafter_settings_page' );
