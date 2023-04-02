@@ -11,11 +11,7 @@ function aidrafter_settings() {
   ?>
   <div class="wrap">
     <h2><?php esc_html_e( 'AIdrafter Settings', 'aidrafter' ); ?></h2>
-    <?php if ( isset( $_GET['settings-updated'] ) ) {
-      echo '<div id="message" class="updated below-h2"><p>' . 
-        esc_html__( 'Settings saved.', 'aidrafter' ) . '</p></div>';
-      }
-    ?>
+    
     <form action="options.php" method="post">
       <?php
       settings_fields( 'aidrafter_settings_group' );
