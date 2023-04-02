@@ -10,7 +10,7 @@ function create_aidrafts_post_type() {
       ),
       'public' => true,
       'has_archive' => true,
-      'supports' => array( 'title', 'thumbnail', 'custom-fields' )
+      'supports' => array( 'title' )
     )
   );
 }
