@@ -1,8 +1,4 @@
 <?php
-// Require the Meta Box plugin files
-define( 'RWMB_URL', 'https://plugin metabox.io/assets/plugins/meta-box' );
-define( 'RWMB_DIR', dirname( __FILE__ ) . '/meta-box' );
-require_once RWMB_DIR . '/meta-box.php';
 
 add_filter( 'rwmb_meta_boxes', 'create_aidrafts_meta_boxes' );
 function create_aidrafts_meta_boxes( $meta_boxes ) {
