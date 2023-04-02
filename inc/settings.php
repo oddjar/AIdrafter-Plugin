@@ -34,18 +34,23 @@ function register_aidrafter_settings() {
   $option_group = 'aidrafter_settings_group';
   $option_name = 'aidrafter_api_key';
   $sanitization_callback = 'sanitize_text_field';
-  
   add_settings_section(
     'aidrafter_settings_general',
     __( 'General Settings', 'aidrafter' ),
     '__return_false',
     'aidrafter'
   );
-  
   add_settings_field(
     'aidrafter_api_key',
     __( 'OpenAI API Key', 'aidrafter' ),
     'aidrafter_api_key_field_callback',
+    'aidrafter',
+    'aidrafter_settings_general'
+  );
+  add_settings_field(
+    'aidrafter_user_id',
+    __( 'User ID', 'aidrafter' ),
+    'aidrafter_user_id_field_callback',
     'aidrafter',
     'aidrafter_settings_general'
   );
@@ -54,6 +59,12 @@ function register_aidrafter_settings() {
     'type' => 'string',
     'sanitize_callback' => $sanitization_callback,
     'default' => '',
+  ) );
+  
+  register_setting( $option_group, 'aidrafter_user_id', array(
+    'type' => 'integer',
+    'sanitize_callback' => 'absint',
+    'default' => 0,
   ) );
 }
 
@@ -112,3 +123,16 @@ function validate_aidrafter_api_key( $new_value, $old_value ) {
 
 add_filter( 'pre_update_option_aidrafter_api_key', 'validate_aidrafter_api_key', 10, 2 );
 
+// Add the dropdown field for the user ID
+function aidrafter_user_id_field_callback() {
+  $option_name = 'aidrafter_user_id';
+  $value = get_option( $option_name );
+  $users = get_users();
+  ?>
+  <select name="<?php echo esc_attr( $option_name ); ?>">
+    <?php foreach ( $users as $user ) { ?>
+      <option value="<?php echo esc_attr( $user->ID ); ?>" <?php selected( $value, $user->ID ); ?>><?php echo esc_html( $user->display_name ); ?></option>
+    <?php } ?>
+  </select>
+  <?php
+}
