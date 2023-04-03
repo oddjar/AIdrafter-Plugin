@@ -61,3 +61,6 @@ function on_publish_update_aidrafter_post( $post_id, $post ) {
 
 add_action('publish_post', 'on_publish_update_aidrafter_post', 10, 2);
 add_action('future_post', 'on_publish_update_aidrafter_post', 10, 2);
+
+// whut?
+
