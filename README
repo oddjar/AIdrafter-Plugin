@@ -1,0 +1,23 @@
+# AIdrafter WordPress Plugin
+
+AIdrafter is a WordPress plugin that uses the OpenAI API to generate unique content for your blog. It works by using a neural network to complete a given prompt.
+
+## Installation
+
+To install the plugin, simply download the latest release from the [releases page](https://github.com/your-username/aidrafter/releases) and extract the contents to your `wp-content/plugins` directory. Then, activate the plugin from the WordPress Dashboard.
+
+You will also need an API key from OpenAI to use this plugin.
+
+## Usage
+
+Once the plugin is installed and activated, you can create a new post as usual. In the post editor, you will see a new section labeled "AIdrafter" where you can enter a prompt for the neural network. 
+
+After you publish the post, the plugin will automatically generate content for your post based on the prompt you provided.
+
+## License
+
+This plugin is released under the GPL v2 or later license.
+
+## Get in touch
+
+If you have any questions or concerns about this plugin, please don't hesitate to contact us at [our website](https://example.com/).

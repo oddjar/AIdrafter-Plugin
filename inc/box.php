@@ -26,7 +26,7 @@ function create_aidrafts_meta_boxes( $meta_boxes ) {
         'id'   => 'prompt',
         'name' => __( 'Prompt', 'aidrafter' ),
         'type' => 'group',
-        'clone' => true,
+        'clone' => false,
         'fields' => array(
           array(
             'id'   => 'prompt_text',
@@ -34,6 +34,12 @@ function create_aidrafts_meta_boxes( $meta_boxes ) {
             'type' => 'textarea',
           ),
         ),
+      ),
+      array(
+        'id'   => 'disclaimer',
+        'name' => __( 'Disclaimer', 'aidrafter' ),
+        'type' => 'textarea',
+        // any other properties you want to add to the field
       ),
     ),
   );

@@ -125,6 +125,9 @@ function aidrafter_user_id_field_callback() {
   $value = get_option( $option_name );
   $users = get_users();
   ?>
+  <p>
+    Author draft 
+  </p>
   <select name="<?php echo esc_attr( $option_name ); ?>">
     <?php foreach ( $users as $user ) { ?>
       <option value="<?php echo esc_attr( $user->ID ); ?>" <?php selected( $value, $user->ID ); ?>><?php echo esc_html( $user->display_name ); ?></option>
